@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getAllPokemon,getPokemon } from "./utils/pokemon";
+import { getAllPokemon, getPokemon } from "./utils/pokemon";
 
 function App() {
   const initialURL = "https://pokeapi.co/api/v2/pokemon/";
@@ -45,8 +45,8 @@ function App() {
       ) : (
         <>
           <div className="pokemonCardContainer">
-            {pokemonData.map((pokemon,i)=>{
-              return <div>Pokemon</div>
+            {pokemonData.map((pokemon, i) => {
+              return <div>Pokemon</div>;
             })}
           </div>
         </>
