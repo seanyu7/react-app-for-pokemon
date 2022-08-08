@@ -5,3 +5,4 @@ export const getAllPokemon = (url) => {
       .then((data) => resolve(data));
   });
 };
+//promiseを使って、データを取得する場合はasyncとawaitを使う必要がある。
