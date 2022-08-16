@@ -14,3 +14,4 @@ export const getPokemon = (url) => {
       .then((data) => resolve(data));
   });
 };
+//データをJsonの形式で取得する必要がある。
