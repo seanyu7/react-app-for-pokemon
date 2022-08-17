@@ -50,6 +50,7 @@ function App() {
               return <Card key={i} pokemon={pokemon}/>;
             })}
           </div>
+        {/*ここでは、pokemonDataの中のデータをmap関数で回すことで、それぞれのデータに対して、Cardコンポネントを呼び出すことが出来る。*/}
         </>
       )}
     </div>
