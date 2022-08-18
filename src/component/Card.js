@@ -1,4 +1,5 @@
 import React from "react";
+import "../component/Card.css";
 
 /*make a card component to make it to make use of map function */
 const Card = ({ pokemon }) => {
