@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { getAllPokemon, getPokemon } from "./utils/pokemon";
 import Card from "./component/Card";
+import Navbar from "./component/Navbar";
 
 function App() {
   const initialURL = "https://pokeapi.co/api/v2/pokemon/";
@@ -40,6 +41,8 @@ function App() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="App">
       {loading ? (
         <h1>Loading...</h1>
@@ -54,6 +57,7 @@ function App() {
         </>
       )}
     </div>
+    </>
   );
 }
 
