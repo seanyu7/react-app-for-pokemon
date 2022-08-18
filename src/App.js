@@ -10,6 +10,8 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [pokemonData, setPokemonData] = useState([]);
+  const [nextURL, setNextURL] = useState("");
+  const [prevURL, setPrevURL] = useState("");
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -20,7 +22,9 @@ function App() {
       //その格納したデータの中のresultという名前の欄に各ポケモンのURLが存在するから、それを呼び出そうとしている。
       loadPokemon(res.results);
       //loadPokemonという関数にres.resultという変数を代入することによって、ここで渡したURLに対しrてどのような作業をするのかについて書くことが出来る。
-
+      //console.log(res);
+      setNextURL(res.next);
+      setPrevURL(res.previous);
       setLoading(false);
     };
     fetchPokemonData();
@@ -40,23 +44,49 @@ function App() {
     setPokemonData(_pokemonData);
   };
 
+  //console.log(pokemonData);
+
+  const handleNextPage = async () => {
+    setLoading(true);
+    let data = await getAllPokemon(nextURL);
+    //console.log(data);
+    await loadPokemon(data.results);
+    setNextURL(data.next);
+    setLoading(false);
+  };
+
+  const handlePrevPage = async() => {
+if (!prevURL) return;
+
+    setLoading(true);
+    let data = await getAllPokemon(prevURL);
+    await loadPokemon(data.results);
+    setNextURL(data.next);
+    setPrevURL(data.previous);
+    setLoading(false);
+  };
+
   return (
     <>
-    <Navbar/>
-    <div className="App">
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <>
-          <div className="pokemonCardContainer">
-            {pokemonData.map((pokemon, i) => {
-              return <Card key={i} pokemon={pokemon}/>;
-            })}
-          </div>
-        {/*ここでは、pokemonDataの中のデータをmap関数で回すことで、それぞれのデータに対して、Cardコンポネントを呼び出すことが出来る。*/}
-        </>
-      )}
-    </div>
+      <Navbar />
+      <div className="App">
+        {loading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <>
+            <div className="pokemonCardContainer">
+              {pokemonData.map((pokemon, i) => {
+                return <Card key={i} pokemon={pokemon} />;
+              })}
+            </div>
+            {/*ここでは、pokemonDataの中のデータをmap関数で回すことで、それぞれのデータに対して、Cardコンポネントを呼び出すことが出来る。*/}
+            <div className="btn">
+              <button onClick={handlePrevPage}>Previous Page</button>
+              <button onClick={handleNextPage}>Next Page</button>
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 }
